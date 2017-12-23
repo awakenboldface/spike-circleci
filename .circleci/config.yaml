@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: hub.docker.com/_/docker/
+    working_directory: ~repo
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
+
+      - setup_remote_docker:   # (2)
+          docker_layer_caching: true # (3)
+
+      - run:
+          name: Run Docker
+          command: |
+            docker run hello-world
